@@ -36,7 +36,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     full_name=models.CharField(max_length=100)
     role=models.CharField(max_length=20,choices=ROLE_CHOICES)
     is_active=models.BooleanField(default=True)
-    is_staff=models.BooleanField(default=True)
+    is_staff=models.BooleanField(default=False)
     date_joined=models.DateTimeField(auto_now_add=True)
     objects=CustomUserManager()
 
