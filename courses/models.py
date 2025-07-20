@@ -17,8 +17,8 @@ class Section(models.Model):
     course=models.ForeignKey(Course,on_delete=models.CASCADE,related_name='sections')
     teacher=models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        null=True,
+        on_delete=models.PROTECT,
+        null=False,
         limit_choices_to={'role':'teacher'},
         related_name='sections'
     )
@@ -28,4 +28,4 @@ class Section(models.Model):
     seats=models.PositiveBigIntegerField(default=30)
 
     def __str__(self):
-        return f"{self.course.course_code} - Section {self.section_number}"
+        return f"{self.course.course_code} - Section {self.section}"
