@@ -20,6 +20,8 @@ class CustomUserManager(BaseUserManager):
     def create_user(self,email,full_name,role,password=None,**extra_fields):
         if not email:
             raise ValueError("Users must have an email address")
+        if role not in dict(ROLE_CHOICES).keys():
+            raise ValueError ("Invalid Role")
         email=self.normalize_email(email)
         user=self.model(email=email,full_name=full_name,role=role,**extra_fields)
         user.set_password(password)
@@ -34,7 +36,7 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser,PermissionsMixin):
     email=models.EmailField(unique=True)
     full_name=models.CharField(max_length=100)
-    role=models.CharField(max_length=20,choices=ROLE_CHOICES)
+    role=models.CharField(max_length=20,choices=ROLE_CHOICES,default=STUDENT)
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
     date_joined=models.DateTimeField(auto_now_add=True)
