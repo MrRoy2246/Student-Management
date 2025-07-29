@@ -7,7 +7,7 @@ urlpatterns = [
     path('accounts/',include("accounts.urls")),
     path('department/',include("departments.urls")),
     path('student/',include("students.urls")),
-    path('course/',include("courses.urls")),
+    # path('course/',include("courses.urls")),
 ]
 
 
