@@ -14,8 +14,14 @@ def generate_student_id():
             pass
     return "STU-001"
 
-@receiver(post_save,sender=User)
-def create_student_profile(sender,instance,created,**kwargs):
-    if created and instance.role =='student':
-        StudentProfile.objects.create(user=instance,
-                                      student_id=generate_student_id())
+# @receiver(post_save,sender=User)
+# def create_student_profile(sender,instance,created,**kwargs):
+#     if created and instance.role =='student':
+#         try:
+#             StudentProfile.objects.create(
+#                 user=instance,
+#                 student_id=generate_student_id()
+#             )
+#         except Exception as e:
+#             # Log the error
+#             print(f"Error creating student profile for {instance.email}: {e}")

@@ -16,5 +16,10 @@ class Department(models.Model):
     class Meta:
         ordering = ['id']
 
+    def get_student_count(self):
+        # Import here to avoid circular import
+        from students.models import StudentProfile
+        return StudentProfile.objects.filter(department=self, is_active=True).count()
+
     def __str__(self):
         return f"{self.code} - {self.name}"
